@@ -7,10 +7,9 @@
 #include "stopwatch.hpp"
 #include "nvs_flash.h"
 #include "BluetoothSerial.h"
-#include "function.h"
+#include <ODriveArduino.h>
 
 // #include <HardwareSerial.h>
-#include <ODriveArduino.h>
 #define PNR 57.29577951308232
 
 using rb::LED_GREEN;
@@ -19,6 +18,7 @@ void configureOdrive( ODriveArduino& odrive );
 #define OTOCNY_MOTOR  rb::MotorId::M1 // motor pro otaceni servoruky
 HardwareSerial odriveSerial(1);
 ODriveArduino odrive(odriveSerial);
+#include "function.h"
 
 rb::Manager& rbc()
 {
@@ -49,7 +49,6 @@ int krok_serva = 2;
 int motor_power = 80;
 bool L_G_light = false; // pro blikani zelene LED - indikuje, ze deska funguje
 int otocka_kola = 13 * 2400 ; // převodovka (1:5) 1:8,  2400 tiků enkodéru na otáčku motoru
-long max_speed = 20000; // pocet tiku za sekundu max cca 200000,  enkodéry zvládají cca 5000 otacek motoru za sekundu
 int speed_coef = 200000; // nasobeni hodnoty, co leze z joysticku
 
 int axis[7] = {5,6,7,8,9,10,11};
@@ -92,7 +91,8 @@ void setup() {
 
     rbc().leds().blue( true );  // zapne modrou LED - tim zapne i Odrive 
 
-    odriveSerial.begin(115200, SERIAL_8N1, 13, 15);
+    odriveSerial.begin(115200, SERIAL_8N1, 13, 15); // todo kontrola, jestli to jede 
+
     Serial.println( "Setup odrive begin" );
 
     odrive.initializeMotors( false );  // true - plná kalibrace,  false - kalibrace bez počátečního pískání
@@ -161,7 +161,6 @@ void loop() {
         Serial.println( millis() );
         SerialBT.println( millis() ); // na pocitaci Burda COM port 13
     }
-    LEVY_MOTOR;
 
     // arm();
     // testovaci(); // - testuje pouze robotickou ruku 

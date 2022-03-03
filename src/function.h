@@ -5,7 +5,7 @@
 // void speed( int axis, float speed ); // pro osu axis nastavi rychlost speed v ticich za sekundu
 // void setAccel( float accel );  // nastavi zrychleni pro dalsi pohyb
 
-
+long max_speed = 20000; // pocet tiku za sekundu max cca 200000,  enkodéry zvládají cca 5000 otacek motoru za sekundu
 const int LEVY_MOTOR = 0;
 const int PRAVY_MOTOR = 1; 
 float smer = 0.0;
@@ -21,26 +21,26 @@ struct Driven {
     bool ok;
 };
 
-bool obstacle();
-{
-    Serial.print(d);  // OVERIT !!!!!
+// bool obstacle();
+// {
+//     Serial.print(d);  // OVERIT !!!!!
 
 
 
-}
-t = millis();
+// }
+// t = millis();
 
-while ( ! Serial1.available() )  
-        sleep(0);
-    c = Serial1.read();
+// while ( ! Serial1.available() )  
+//         sleep(0);
+//     c = Serial1.read();
 
-if ((millis() - t) > 4000) {
-            rbc().setMotors().stop(LEFT_MOTOR)
-                             .stop(RIGHT_MOTOR)
-                             .set();
-            Serial.println("Calibration failed (timeout)");
-            return false;
-        }
+// if ((millis() - t) > 4000) {
+//             rbc().setMotors().stop(LEFT_MOTOR)
+//                              .stop(RIGHT_MOTOR)
+//                              .set();
+//             Serial.println("Calibration failed (timeout)");
+//             return false;
+//         }
 
 void drive(int levy, int pravy) // pocet tiku enkoderu levny motor, pravy motor , vraci neujetou vzdalenost, 0 znamena, ze dojel, jak ma 
 {   
@@ -52,7 +52,7 @@ void drive(int levy, int pravy) // pocet tiku enkoderu levny motor, pravy motor 
         int left_enc_begin = odrive.getPos( LEVY_MOTOR );
         int right_enc_begin = odrive.getPos( PRAVY_MOTOR );
         Serial.println("drive");
-        while (! (end_L and end_R) ) 
+        while (true) // * ! (end_L and end_R)
         {
             // if  ( !( digitalRead(33) and digitalRead(5) and digitalRead(27) and digitalRead(26) and digitalRead(25) ) ) {
             //     Serial.println("obstacle detected");
@@ -68,8 +68,8 @@ void drive(int levy, int pravy) // pocet tiku enkoderu levny motor, pravy motor 
                 odrive.move( LEVY_MOTOR, a.left_enc, max_speed );
                 odrive.move( PRAVY_MOTOR, a.right_enc, max_speed );
                 delay(100);
-                a.left_enc = levy - odrive.getPos( LEVY_MOTOR ) - left_enc_begin);
-                a.right_enc = pravy - odrive.getPos( PRAVY_MOTOR ) - right_enc_begin);
+                a.left_enc = levy - odrive.getPos( LEVY_MOTOR ) - left_enc_begin;
+                a.right_enc = pravy - odrive.getPos( PRAVY_MOTOR ) - right_enc_begin;
                 printf( "levy %i, pravy %i, a.left_enc %i, a.right_enc %i \n", levy, pravy , a.left_enc, a.right_enc );
                 a.ok = ( ( ((levy >= 0) and (a.left_enc < 2)) or  ((levy <= 0) and (a.left_enc > 2)) ) and 
                        ( ((pravy >= 0) and (a.right_enc < 2)) or  ((pravy <= 0) and (a.right_enc > 2)) ) ) ? true : false ;

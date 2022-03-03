@@ -38,3 +38,4 @@
 .vscode/launch.json
 .vscode/ipch
 *.pdf
+credentials.hpp
