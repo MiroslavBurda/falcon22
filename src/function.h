@@ -5,7 +5,7 @@
 // void speed( int axis, float speed ); // pro osu axis nastavi rychlost speed v ticich za sekundu
 // void setAccel( float accel );  // nastavi zrychleni pro dalsi pohyb
 
-long max_speed = 20000; // pocet tiku za sekundu max cca 200000,  enkodéry zvládají cca 5000 otacek motoru za sekundu
+long max_speed = 40000; // pocet tiku za sekundu max cca 200000,  enkodéry zvládají cca 5000 otacek motoru za sekundu
 const int LEVY_MOTOR = 0;
 const int PRAVY_MOTOR = 1; 
 float smer = 0.0;
@@ -20,27 +20,6 @@ struct Driven {
     int right_enc;
     bool ok;
 };
-
-// bool obstacle();
-// {
-//     Serial.print(d);  // OVERIT !!!!!
-
-
-
-// }
-// t = millis();
-
-// while ( ! Serial1.available() )  
-//         sleep(0);
-//     c = Serial1.read();
-
-// if ((millis() - t) > 4000) {
-//             rbc().setMotors().stop(LEFT_MOTOR)
-//                              .stop(RIGHT_MOTOR)
-//                              .set();
-//             Serial.println("Calibration failed (timeout)");
-//             return false;
-//         }
 
 void drive(int levy, int pravy) // pocet tiku enkoderu levny motor, pravy motor , vraci neujetou vzdalenost, 0 znamena, ze dojel, jak ma 
 {   

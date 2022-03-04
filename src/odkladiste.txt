@@ -1,5 +1,63 @@
 odkladiste
 
+    // arm();
+    // testovaci(); // - testuje pouze robotickou ruku 
+    // if ( read_joystick() )
+    // {
+    //     float axis_0 = (abs(axis[0]) < 10) ? 0 : axis[0] /128.0; 
+    //     axis_0 = axis_0*axis_0*axis_0;
+    //     float axis_1 = (abs(axis[1]) < 10) ? 0 : axis[1] /128.0; 
+    //     axis_1 = axis_1*axis_1*axis_1;
+    //     int levy_m = -(axis_1- (axis_0 /2 )) * speed_coef;
+    //     int pravy_m = -(axis_1+ (axis_0 /2 )) * speed_coef;
+    //     odrive.speed( 0 , levy_m );
+    //     odrive.speed( 1 , pravy_m  );
+    //     if ( odrive.error() )
+    //         odrive.dumpErrors();
+    //     printf(" %i %i \n ", levy_m, pravy_m );
+    //     Serial.println(levy_m);
+    //     Serial.println(pravy_m);
+    //     SerialBT.println(levy_m);
+    //     SerialBT.println(pravy_m);
+    //     SerialBT.print(levy_m); SerialBT.print(" "); SerialBT.println(pravy_m);
+    // }
+
+    // odrive.turnOff();  // vypíná odrive
+    // Serial.println( "Turned off" );
+
+    // while( true ) {
+    //     delay( 500 );
+    //     Serial.print( "Pos: " );
+    //     Serial.println( odrive.getPos( 0 ) );  // vraci pozici enkoderu osy 0
+    // }
+
+    // void speed( int axis, float speed ); // pro osu axis nastavi rychlost speed v ticich za sekundu
+    // void setAccel( float accel );  // nastavi zrychleni pro dalsi pohyb
+
+
+// bool obstacle();
+// {
+//     Serial.print(d);  // OVERIT !!!!!
+
+
+
+// }
+// t = millis();
+
+// while ( ! Serial1.available() )  
+//         sleep(0);
+//     c = Serial1.read();
+
+// if ((millis() - t) > 4000) {
+//             rbc().setMotors().stop(LEFT_MOTOR)
+//                              .stop(RIGHT_MOTOR)
+//                              .set();
+//             Serial.println("Calibration failed (timeout)");
+//             return false;
+//         }
+
+
+
 b4ecf80f50513622ff73f1b219c4429a63851531
 
    // odriveSerial.begin(115200, SERIAL_8N1, 13, 15);
