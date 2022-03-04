@@ -9,6 +9,7 @@
 #include "BluetoothSerial.h"
 #include <ODriveArduino.h>
 
+// todo preskladat program, aby byl prehledny 
 // #include <HardwareSerial.h>
 #define PNR 57.29577951308232
 
@@ -91,9 +92,10 @@ void setup() {
 
     rbc().leds().blue( true );  // zapne modrou LED - tim zapne i Odrive 
 
-    odriveSerial.begin(115200, SERIAL_8N1, 13, 15); // todo kontrola, jestli to jede 
+    odriveSerial.begin(115200, SERIAL_8N1, 15, 13);
 
     Serial.println( "Setup odrive begin" );
+    configureOdrive(odrive);
 
     odrive.initializeMotors( false );  // true - plná kalibrace,  false - kalibrace bez počátečního pískání
     if ( odrive.error() )
@@ -118,10 +120,10 @@ void setup() {
 
         odrive.move( 0, 0, max_speed ); // dojeď s osou 0 na pozici 0 rychlostí max_speed tiků na otáčku 
         odrive.move( 1, 0, max_speed ); 
-        delay( 4000 );
+        delay( 2000 );
 
-        odrive.move( 0, otocka_kola / 2, max_speed );
-        odrive.move( 1, otocka_kola / 2, max_speed ); 
+        odrive.move( 0, otocka_kola, max_speed*2 );
+        odrive.move( 1, otocka_kola, max_speed*2 ); 
         delay( 1000 );
 
         odrive.move( 0, 0, max_speed );
@@ -130,6 +132,8 @@ void setup() {
 
         if ( odrive.error() )
             odrive.dumpErrors();
+
+        vpred(200);
 
     // odrive.turnOff();  // vypíná odrive
     // Serial.println( "Turned off" );
@@ -145,7 +149,10 @@ void setup() {
 
 
     // delay(500);
-       send_data.restart();
+    send_data.restart();
+
+
+
 }
 void arm();
 void testovaci(); // dole pod main
